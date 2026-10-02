@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Flight;
 use App\Http\Requests\StoreFlightRequest;
 use App\Http\Requests\UpdateFlightRequest;
+use Illuminate\Http\Request;
 
 class FlightController extends Controller
 {
@@ -13,7 +14,7 @@ class FlightController extends Controller
      */
     public function index()
     {
-        //
+        return Flight::all();
     }
 
     /**
@@ -27,9 +28,10 @@ class FlightController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFlightRequest $request)
+    public function store(Request $request)
     {
-        //
+        $record = new Flight();
+        $record->fill($request->all())->save();
     }
 
     /**
@@ -51,9 +53,10 @@ class FlightController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFlightRequest $request, Flight $flight)
+    public function update(Request $request, Flight $flight)
     {
-        //
+        $record = Flight::find($flight);
+        $record->fill($request->all())->save();
     }
 
     /**
@@ -61,6 +64,6 @@ class FlightController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        //
+        Flight::find($flight)->delete();
     }
 }
