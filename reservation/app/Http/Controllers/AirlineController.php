@@ -37,7 +37,7 @@ class AirlineController extends Controller
      */
     public function show(Airline $airline)
     {
-        return Airline::find($airline);
+        return $airline;
     }
 
     /**
@@ -53,8 +53,7 @@ class AirlineController extends Controller
      */
     public function update(Request $request, Airline $airline)
     {
-        $record = Airline::find($airline);
-        $record->fill($request->all())->save();
+        $airline->fill($request->all())->save();
     }
 
     /**
@@ -62,6 +61,6 @@ class AirlineController extends Controller
      */
     public function destroy(Airline $airline)
     {
-        Airline::find($airline)->delete();
+        $airline->delete();
     }
 }

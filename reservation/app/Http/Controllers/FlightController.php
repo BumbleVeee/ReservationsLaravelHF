@@ -39,7 +39,7 @@ class FlightController extends Controller
      */
     public function show(Flight $flight)
     {
-        //
+        return $flight;
     }
 
     /**
@@ -55,8 +55,7 @@ class FlightController extends Controller
      */
     public function update(Request $request, Flight $flight)
     {
-        $record = Flight::find($flight);
-        $record->fill($request->all())->save();
+        $flight->fill($request->all())->save();
     }
 
     /**
@@ -64,6 +63,6 @@ class FlightController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        Flight::find($flight)->delete();
+        $flight->delete();
     }
 }

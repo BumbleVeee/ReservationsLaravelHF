@@ -30,8 +30,7 @@ class UserContoller extends Controller
      */
     public function show(User $user)
     {
-        return User::find($user);
-        //return $user;
+        return $user;
     }
 
     /**
@@ -39,7 +38,7 @@ class UserContoller extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->fill($request->all())->save();
     }
 
     /**
@@ -47,6 +46,6 @@ class UserContoller extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 }
