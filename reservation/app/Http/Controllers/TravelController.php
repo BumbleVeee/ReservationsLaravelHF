@@ -37,9 +37,11 @@ class TravelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Travel $travel)
+    public function show($flight_id, $user_id)
     {
-        //
+        return Travel::where('flight_id', $flight_id)
+        ->where('user_id', $user_id)
+        ->firstOrFail();
     }
 
     /**
@@ -61,8 +63,19 @@ class TravelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Travel $travel)
+    public function destroy($flight_id, $user_id)
     {
-        //
+        $deleted = Travel::where('flight_id', $flight_id)
+            ->where('user_id', $user_id)
+            ->delete();
+
+        if (!$deleted) {
+            abort(404);
+        }
+
+        return response()->json([
+            'message' => 'Foglalás sikeresen törölve.'
+        ]);
     }
+
 }

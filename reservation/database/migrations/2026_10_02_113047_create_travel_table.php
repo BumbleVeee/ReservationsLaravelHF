@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('travel', function (Blueprint $table) {
-            $table->id();
             $table->enum('evaluation', ["foglalva", "lemondva", "fizetve"]);
             $table->foreignId('flight_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->primary(['flight_id', 'user_id']);
             $table->timestamps();
         });
     }
